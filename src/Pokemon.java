@@ -4,11 +4,7 @@ public class Pokemon {
 	private String pokemonName;
 	private String pokemonType;
 	
-	private String pokemonAttackOne;
-	private String pokemonAttackTwo;
-	private String pokemonAttackThree;
-	private String pokemonAttackFour;
-
+	Attack pokemonAttackOne;
 	
 	private int pokemonHealthPoints;
 	private int pokemonDefense;
@@ -19,17 +15,14 @@ public class Pokemon {
 	/**
 	 * Constructor
 	 */
-	public Pokemon(String name, String type, String attackOne, String attackTwo, String attackThree, String attackFour, int hp, int def, int spd, int atk) {
+	public Pokemon(String name, String type, Attack attackOne, int hp, int atk, int def, int spd) {
 		this.pokemonName = name;
 		this.pokemonType = type;
 		this.pokemonAttackOne = attackOne;
-		this.pokemonAttackTwo = attackTwo;
-		this.pokemonAttackThree = attackThree;
-		this.pokemonAttackFour = attackFour;
 		this.pokemonHealthPoints = hp;
+		this.pokemonAttack = atk;
 		this.pokemonDefense = def;
 		this.pokemonSpeed = spd;
-		this.pokemonAttack = atk;
 	}
 	
 	/**
