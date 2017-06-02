@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class main {
 	
 	public static void main(String[] args) {
@@ -20,35 +18,7 @@ public class main {
 	public static void choosePokemon() {
 		
 	}
-		
-	public static boolean isStab(Attack attack, Pokemon pokemon) {
-		
-		boolean stab = false;
-		String attackType = attack.getAttackType();
-		String pokemonType = pokemon.getType();
-		
-		if (attackType.equals(pokemonType)) {
-			stab = true;
-		}
-		
-		return stab;
-		
-	}
-	
-	public static boolean isCriticalHit() {
-				
-		boolean criticalHit = false;
-		Random random = new Random();
-	    double chance = random.nextInt(100);
-	    
-	    if (chance < 6.25) { // 6.25%
-	    	criticalHit = true;
-	    	System.out.println("Ein Volltreffer!");
-	    }
-
-	    return criticalHit;
-	}
-	
+			
 	public static void renderHealthBar(Pokemon current) {
 		
 		int currentHP = current.getHealthPoints();
