@@ -6,6 +6,7 @@ public class Pokemon {
 	
 	Attack pokemonAttackOne;
 	
+	private int pokemonMaxHealthPoints;
 	private int pokemonHealthPoints;
 	private int pokemonDefense;
 	private int pokemonSpeed;
@@ -19,11 +20,14 @@ public class Pokemon {
 		this.pokemonName = name;
 		this.pokemonType = type;
 		this.pokemonAttackOne = attackOne;
+		this.pokemonMaxHealthPoints = hp;
 		this.pokemonHealthPoints = hp;
 		this.pokemonAttack = atk;
 		this.pokemonDefense = def;
 		this.pokemonSpeed = spd;
 	}
+	
+	
 	
 	/**
 	 * Get Pokemon Name
@@ -56,8 +60,8 @@ public class Pokemon {
 	}
 	
 	/**
-	 * Get Pokemon health points
-	 * @return String
+	 * Get Pokemon current health points
+	 * @return int
 	 */
 	public int getHealthPoints() {
 		return pokemonHealthPoints;
@@ -68,6 +72,14 @@ public class Pokemon {
 	 */
 	public void setHealthPoints(int hp) {
 		this.pokemonHealthPoints = hp;
+	}
+	
+	/**
+	 * Get Pokemon maximum health points
+	 * @return String
+	 */
+	public int getMaxHealthPoints() {
+		return pokemonMaxHealthPoints;
 	}
 	
 	/**
