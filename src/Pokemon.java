@@ -4,7 +4,7 @@ public class Pokemon {
 	private String pokemonName;
 	private String pokemonType;
 	
-	Attack pokemonAttackOne;
+	Move pokemonMoveOne;
 	
 	private int pokemonMaxHealthPoints;
 	private int pokemonHealthPoints;
@@ -23,10 +23,10 @@ public class Pokemon {
 	 * @param defense as int
 	 * @param speed as int
 	 */
-	public Pokemon(String name, String type, Attack attackOne, int healthpoints, int attack, int defense, int speed) {
+	public Pokemon(String name, String type, Move moveOne, int healthpoints, int attack, int defense, int speed) {
 		this.pokemonName = name;
 		this.pokemonType = type;
-		this.pokemonAttackOne = attackOne;
+		this.pokemonMoveOne = moveOne;
 		this.pokemonMaxHealthPoints = healthpoints;
 		this.pokemonHealthPoints = healthpoints;
 		this.pokemonAttack = attack;
@@ -101,7 +101,22 @@ public class Pokemon {
 	public void setDefense(int defense) {
 		this.pokemonDefense = defense;
 	}
-
+	
+	/**
+	 * Set Pokemon attack
+	 */
+	public void setAttack(int attack) {
+		this.pokemonAttack = attack;
+	}
+	
+	/**
+	 * Get Pokemon attack
+	 * @return int
+	 */
+	public int getAttack() {
+		return pokemonAttack;
+	}
+	
 	/**
 	 * Get Pokemon speed
 	 * @return int
@@ -116,20 +131,4 @@ public class Pokemon {
 	public void setSpeed(int speed) {
 		this.pokemonSpeed = speed;
 	}
-	
-	/**
-	 * Set Pokemon attack
-	 */
-	public void setAttack(int attack) {
-		this.pokemonDefense = attack;
-	}
-	
-	/**
-	 * Get Pokemon attack
-	 * @return int
-	 */
-	public int getAttack() {
-		return pokemonAttack;
-	}
-	
 }

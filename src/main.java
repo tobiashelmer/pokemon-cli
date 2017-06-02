@@ -2,17 +2,16 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-		Attack tackle = new Attack("Tackle", "Normal", 20, 20, 100);
-		Attack rankenhieb = new Attack("Rankenhieb", "Pflanze", 35, 10, 100);
-		Attack glut = new Attack("Glut", "Feuer", 40, 25, 100);
+		Move tackle = new Move("Tackle", "Normal", 20, 20, 100);
+		Move rankenhieb = new Move("Rankenhieb", "Pflanze", 35, 10, 100);
+		Move glut = new Move("Glut", "Feuer", 40, 25, 100);
 
 		Pokemon bisasam = new Pokemon("Bisasam", "Pflanze", rankenhieb, 21, 13, 10, 10);
 		Pokemon glumanda = new Pokemon("Glumanda", "Feuer", glut, 21, 13, 10, 10);
 		
 		//renderHealthBar(Glumanda);
 		
-		Attack.calculateDamage(rankenhieb, bisasam, glumanda);
-				
+		Move.calculateDamage(rankenhieb, bisasam, glumanda);				
 	}	
 	
 	public static void choosePokemon() {
