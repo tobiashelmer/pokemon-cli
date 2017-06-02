@@ -2,52 +2,25 @@ import java.util.Random;
 
 public class main {
 	
-	public static final double STAB_MULTIPLIER = 1.5; 
-	public static final double CRIT_MULTIPLIER = 2; 
-
 	public static void main(String[] args) {
 		
-		//Attack Tackle = new Attack("Tackle", "Normal", 20, 20, 100);
-		Attack Rankenhieb = new Attack("Rankenhieb", "Pflanze", 35, 10, 100);
-		Attack Glut = new Attack("Glut", "Feuer", 40, 25, 100);
+		Attack tackle = new Attack("Tackle", "Normal", 20, 20, 100);
+		Attack rankenhieb = new Attack("Rankenhieb", "Pflanze", 35, 10, 100);
+		Attack glut = new Attack("Glut", "Feuer", 40, 25, 100);
 
-		Pokemon Bisasam = new Pokemon("Bisasam", "Pflanze", Rankenhieb, 21, 13, 10, 10);
-		Pokemon Glumanda = new Pokemon("Glumanda", "Feuer", Glut, 21, 13, 10, 10);
+		Pokemon bisasam = new Pokemon("Bisasam", "Pflanze", rankenhieb, 21, 13, 10, 10);
+		Pokemon glumanda = new Pokemon("Glumanda", "Feuer", glut, 21, 13, 10, 10);
 		
-		renderHealthBar(Glumanda);
+		//renderHealthBar(Glumanda);
 		
-		calculateDamage(Rankenhieb, Bisasam, Glumanda);
+		Attack.calculateDamage(rankenhieb, bisasam, glumanda);
 				
 	}	
 	
-	public static int calculateDamage(Attack attack, Pokemon attacker, Pokemon defender) {
+	public static void choosePokemon() {
 		
-		boolean stab = isStab(attack, attacker);
-		boolean crit = isCriticalHit();
-		double multiplier = 1;
-		
-		int hp = defender.getHealthPoints();
-		int attackPower = attack.getAttackPower();
-		int attackerAttack = attacker.getAttack();
-		int defenderDefense = defender.getDefense();
-		
-		if (stab) {
-			multiplier *= STAB_MULTIPLIER;
-		}
-		
-		if (crit) {
-			multiplier *= CRIT_MULTIPLIER;
-		}
-		
-		int damage = (int) ((((((2*5)/5)+2) * attackPower * (attackerAttack / defenderDefense) / 50) + 2) * multiplier);
-
-		defender.setHealthPoints(hp - damage);
-		
-		System.out.println(attack.getAttackName() + " hat " + damage + " Schaden zugefuegt!");
-		 
-		return damage;
 	}
-	
+		
 	public static boolean isStab(Attack attack, Pokemon pokemon) {
 		
 		boolean stab = false;
