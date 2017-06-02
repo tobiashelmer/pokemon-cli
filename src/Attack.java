@@ -2,8 +2,8 @@ import java.util.Random;
 
 public class Attack {
 	
-	public static final double STAB_MULTIPLIER = 1.5; 
-	public static final double CRIT_MULTIPLIER = 2; 
+	final static double STAB_MULTIPLIER = 1.5; 
+	final static double CRIT_MULTIPLIER = 2; 
 	
 	private String attackName;
 	private String attackType;
@@ -12,14 +12,19 @@ public class Attack {
 	private int attackAccuracy;
 	
 	/**
-	 * Constructor
+	 * Class Constructor
+	 * @param name as String
+	 * @param type as String
+	 * @param power as int
+	 * @param powerpoints as int
+	 * @param accuracy as int
 	 */
-	public Attack(String name, String type, int power, int pp, int acc) {
+	public Attack(String name, String type, int power, int powerpoints, int accuracy) {
 		this.attackName = name;
 		this.attackType = type;
 		this.attackPower = power;
-		this.attackPowerPoints = pp;
-		this.attackAccuracy = acc;
+		this.attackPowerPoints = powerpoints;
+		this.attackAccuracy = accuracy;
 	}
 	
 	/**
@@ -31,7 +36,8 @@ public class Attack {
 	}
 	
 	/**
-	 * Set the name of attack 
+	 * Set the name of attack
+	 * @param attack as String 
 	 */
 	public void setAttackName(String attack) {
 		this.attackName = attack;
@@ -47,6 +53,7 @@ public class Attack {
 	
 	/**
 	 * Set the type of attack 
+	 * @param type as String
 	 */
 	public void setAttackType(String type) {
 		this.attackType = type;
@@ -61,7 +68,8 @@ public class Attack {
 	}
 	
 	/**
-	 * Set the power of attack 
+	 * Set the power of attack
+	 * @param power as int 
 	 */
 	public void setAttackPower(int power) {
 		this.attackPower = power;
@@ -76,10 +84,11 @@ public class Attack {
 	}
 	
 	/**
-	 * Set the power points of attack 
+	 * Set the power points of attack
+	 * @param powerpoints as int 
 	 */
-	public void setAttackPowerPoints(int pp) {
-		this.attackPowerPoints = pp;
+	public void setAttackPowerPoints(int powerpoints) {
+		this.attackPowerPoints = powerpoints;
 	}
 	
 	/**
@@ -91,38 +100,48 @@ public class Attack {
 	}
 	
 	/**
-	 * Set the accuracy of attack 
+	 * Set the accuracy of attack
+	 * @param accuracy as int 
 	 */
-	public void setAttackAccuracy(int acc) {
-		this.attackAccuracy = acc;
+	public void setAttackAccuracy(int accuracy) {
+		this.attackAccuracy = accuracy;
 	}
 	
-	
+	/**
+	 * Calculates the damage done by the attacker pokemon and returns it as int
+	 * @param attack as Attack
+	 * @param attacker as Pokemon
+	 * @param defender as Pokemon
+	 * @return int
+	 */
 	public static int calculateDamage(Attack attack, Pokemon attacker, Pokemon defender) {
 		
 		boolean stab = isStab(attack, attacker);
 		boolean crit = isCriticalHit();
 		double multiplier = 1;
-		
 		int damage;
 		int hp = defender.getHealthPoints();
 		int attackPower = attack.getAttackPower();
 		int attackerAttack = attacker.getAttack();
 		int defenderDefense = defender.getDefense();
 		
-		
+		// if type matches (see isStab()) adds STAB_MULTIPLIER to multiplier
 		if (stab) {
 			multiplier *= STAB_MULTIPLIER;
 		}
 		
+		// if attack crits (see isCrit()) adds CRIT_MULTIPLIER to multiplier
 		if (crit) {
 			multiplier *= CRIT_MULTIPLIER;
 		}
 		
+		// damage calculation
 		damage = (int) ((((((2*5)/5)+2) * attackPower * (attackerAttack / defenderDefense) / 50) + 2) * multiplier);
 
+		// lowers Pokemon HP by the damage dealt
 		defender.setHealthPoints(hp - damage);
 		
+		// prints out damage message
 		System.out.println(attack.getAttackName() + " hat " + damage + " Schaden zugefuegt!");
 		 
 		return damage;
@@ -131,7 +150,12 @@ public class Attack {
 	
 	/**
 	 * Same Type Attack Bonus (STAB)
+	 * <br>
 	 * 50% damage boost of an attack when it is the same type as one of the types of the Pokemon using the attack
+	 * 
+	 * @param attack as Attack
+	 * @param pokemon as Pokemon
+	 * @return boolean
 	 */
 	public static boolean isStab(Attack attack, Pokemon pokemon) {
 		
@@ -139,6 +163,7 @@ public class Attack {
 		String attackType = attack.getAttackType();
 		String pokemonType = pokemon.getType();
 		
+		// if attack type matches pokemon type set stab to true
 		if (attackType.equals(pokemonType)) {
 			stab = true;
 		}
@@ -148,8 +173,8 @@ public class Attack {
 	}
 	
 	/**
-	 * Critical Hit
 	 * Random event that doubles the damage of a damage-dealing move. 
+	 * @return boolean
 	 */
 	public static boolean isCriticalHit() {
 				
@@ -157,7 +182,8 @@ public class Attack {
 		Random random = new Random();
 	    double chance = random.nextInt(100);
 	    
-	    if (chance < 6.25) { // 6.25%
+	    // simulates a 6.25% chance of a critical hit
+	    if (chance < 6.25) {
 	    	criticalHit = true;
 	    	System.out.println("Ein Volltreffer!");
 	    }

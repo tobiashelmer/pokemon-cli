@@ -14,20 +14,25 @@ public class Pokemon {
 	
 	
 	/**
-	 * Constructor
+	 * Class Constructor
+	 * @param name as String
+	 * @param type as String
+	 * @param attackOne as Attack
+	 * @param healthpoints as int
+	 * @param attack as int
+	 * @param defense as int
+	 * @param speed as int
 	 */
-	public Pokemon(String name, String type, Attack attackOne, int hp, int atk, int def, int spd) {
+	public Pokemon(String name, String type, Attack attackOne, int healthpoints, int attack, int defense, int speed) {
 		this.pokemonName = name;
 		this.pokemonType = type;
 		this.pokemonAttackOne = attackOne;
-		this.pokemonMaxHealthPoints = hp;
-		this.pokemonHealthPoints = hp;
-		this.pokemonAttack = atk;
-		this.pokemonDefense = def;
-		this.pokemonSpeed = spd;
+		this.pokemonMaxHealthPoints = healthpoints;
+		this.pokemonHealthPoints = healthpoints;
+		this.pokemonAttack = attack;
+		this.pokemonDefense = defense;
+		this.pokemonSpeed = speed;
 	}
-	
-	
 	
 	/**
 	 * Get Pokemon Name
