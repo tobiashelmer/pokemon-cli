@@ -131,4 +131,21 @@ public class Pokemon {
 	public void setSpeed(int speed) {
 		this.pokemonSpeed = speed;
 	}
+	
+	public static int calculateStats (Pokemon pokemon) {
+		
+		int stats;
+		int hp = pokemon.getHealthPoints();
+		int attack = pokemon.getAttack();
+		int defense = pokemon.getDefense();
+		int speed = pokemon.getSpeed();
+		
+		// ((2 * basiswert + dv + fp/4) * level / 100 + 5) * wesen
+		stats = (2 * base) *  level / 100 + 5;
+		
+		// (2 * basiswert + dv + fp/4 + 100) * level / 100 + 10
+		statshp = (2 * base + 100) *  level / 100 + 10;
+		
+		return stats;
+	}
 }
