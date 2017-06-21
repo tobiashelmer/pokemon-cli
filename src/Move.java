@@ -5,11 +5,12 @@ public class Move {
     private final static double STAB_MULTIPLIER = 1.5;
     private final static double CRIT_MULTIPLIER = 2;
 
-    private String moveName;
-    private String moveType;
-    private int movePower;
-    private int movePowerPoints;
-    private int moveAccuracy;
+    private String name;
+    private String type;
+    private int power;
+    private int powerPoints;
+    private int maxPowerPoints;
+    private int accuracy;
 
     /**
      * Class Constructor
@@ -21,11 +22,12 @@ public class Move {
      * @param accuracy    as int
      */
     public Move(String name, String type, int power, int powerpoints, int accuracy) {
-        this.moveName = name;
-        this.moveType = type;
-        this.movePower = power;
-        this.movePowerPoints = powerpoints;
-        this.moveAccuracy = accuracy;
+        this.name = name;
+        this.type = type;
+        this.power = power;
+        this.powerPoints = powerpoints;
+        this.maxPowerPoints = powerpoints;
+        this.accuracy = accuracy;
     }
 
     /**
@@ -33,8 +35,8 @@ public class Move {
      *
      * @return String
      */
-    public String getmoveName() {
-        return moveName;
+    public String getName() {
+        return name;
     }
 
     /**
@@ -42,8 +44,8 @@ public class Move {
      *
      * @param move as String
      */
-    public void setmoveName(String move) {
-        this.moveName = move;
+    public void setName(String move) {
+        this.name = move;
     }
 
     /**
@@ -51,8 +53,8 @@ public class Move {
      *
      * @return String
      */
-    public String getmoveType() {
-        return moveType;
+    public String getType() {
+        return type;
     }
 
     /**
@@ -60,8 +62,8 @@ public class Move {
      *
      * @param type as String
      */
-    public void setmoveType(String type) {
-        this.moveType = type;
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**
@@ -69,8 +71,8 @@ public class Move {
      *
      * @return int
      */
-    public int getmovePower() {
-        return movePower;
+    public int getPower() {
+        return power;
     }
 
     /**
@@ -78,8 +80,8 @@ public class Move {
      *
      * @param power as int
      */
-    public void setmovePower(int power) {
-        this.movePower = power;
+    public void setPower(int power) {
+        this.power = power;
     }
 
     /**
@@ -87,8 +89,8 @@ public class Move {
      *
      * @return int
      */
-    public int getmovePowerPoints() {
-        return movePowerPoints;
+    public int getPowerPoints() {
+        return powerPoints;
     }
 
     /**
@@ -96,8 +98,8 @@ public class Move {
      *
      * @param powerpoints as int
      */
-    public void setmovePowerPoints(int powerpoints) {
-        this.movePowerPoints = powerpoints;
+    public void setPowerPoints(int powerpoints) {
+        this.powerPoints = powerpoints;
     }
 
     /**
@@ -105,8 +107,8 @@ public class Move {
      *
      * @return int
      */
-    public int getmoveAccuracy() {
-        return moveAccuracy;
+    public int getAccuracy() {
+        return accuracy;
     }
 
     /**
@@ -114,12 +116,12 @@ public class Move {
      *
      * @param accuracy as int
      */
-    public void setmoveAccuracy(int accuracy) {
-        this.moveAccuracy = accuracy;
+    public void setAccuracy(int accuracy) {
+        this.accuracy = accuracy;
     }
 
     /**
-     * Calculates the damage done by the moveer pokemon and returns it as int
+     * Calculates the damage done by the attacker pokemon and returns it as int
      *
      * @param move     as move
      * @param attacker as Pokemon
@@ -133,7 +135,7 @@ public class Move {
         double multiplier = 1;
         int damage;
         int hp = defender.getHealthPoints();
-        int movePower = move.getmovePower();
+        int movePower = move.getPower();
         int attackerAttack = attacker.getAttack();
         int defenderDefense = defender.getDefense();
 
@@ -154,7 +156,7 @@ public class Move {
         defender.setHealthPoints(hp - damage);
 
         // prints out damage message
-        System.out.println(move.getmoveName() + " hat " + damage + " Schaden zugefuegt!");
+        System.out.println(move.getName() + " hat " + damage + " Schaden zugefuegt!");
 
         return damage;
     }
@@ -172,7 +174,7 @@ public class Move {
     private static boolean isStab(Move move, Pokemon pokemon) {
 
         boolean stab = false;
-        String moveType = move.getmoveType();
+        String moveType = move.getType();
         String pokemonType = pokemon.getType();
 
         // if move type matches pokemon type set stab to true
@@ -181,7 +183,6 @@ public class Move {
         }
 
         return stab;
-
     }
 
     /**
