@@ -29,21 +29,7 @@ public class main {
         Move steinhagel = new Move("Steinhagel", "Gestein", 75, 10, 90);
 
 
-        Pokemon bisaflor = new Pokemon("Bisaflor", "Pflanze", rasierblatt, 187, 134, 135, 132);
-        Pokemon glurak = new Pokemon("Glumanda", "Feuer", flammenwurf, 185, 136, 130, 152);
-        Pokemon turtok = new Pokemon("Turtok", "Wasser", surfer, 186, 137, 152, 130);
-        Pokemon pikachu = new Pokemon("Pikachu", "Elektro", donnerblitz, 142, 107, 92, 142);
-        Pokemon tauboss = new Pokemon("Tauboss", "Flug", windstoss, 190, 132, 127, 153);
-        Pokemon garados = new Pokemon("Garados", "Wasser", surfer, 202, 177, 131, 133);
-        Pokemon simsala = new Pokemon("Simsala", "Psycho", psychokinese, 162, 187, 97, 172);
-        Pokemon gengar = new Pokemon("Gengar", "Geist", psychokinese, 167, 222, 132, 182);
-        Pokemon dragoran = new Pokemon("Dragoran", "Drache", drachenwut, 198, 186, 147, 132);
-        Pokemon relaxo = new Pokemon("Relaxo", "Normal", tackle, 267, 162, 117, 82);
-
-
-        //renderHealthBar(Glumanda);
-
-        Move.calculateDamage(psychokinese, simsala, relaxo);
+        Pokemon bisaflor = new Pokemon("Bisaflor", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
     }
 
     public static void choosePokemon() {
