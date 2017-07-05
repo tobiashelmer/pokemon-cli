@@ -48,9 +48,8 @@ public class Game {
 
         do {
 
-            for (int i = 0; i < poolOfPokemon.size(); i++) {
-                Pokemon arrayListPokemon = poolOfPokemon.get(i);
-                System.out.println("(" + (i + 1) + ") " + arrayListPokemon.getName());
+            for (Pokemon poke:poolOfPokemon) {
+                System.out.println("("+(poolOfPokemon.indexOf(poke) + 1)+") " + poke.getName());
             }
 
             try {
