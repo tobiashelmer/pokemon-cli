@@ -1,6 +1,10 @@
-public class main {
+import java.util.ArrayList;
 
+public class main {
     public static void main(String[] args) {
+
+        // New Player
+        Player player = new Player("Flo");
 
         // normal moves
         Move tackle = new Move("Tackle", "Normal", 50, 35, 100);
@@ -18,7 +22,6 @@ public class main {
         Move aquaknarre = new Move("Aquaknarre", "Wasser", 40, 25, 100);
         Move surfer = new Move("Surfer", "Wasser", 90, 15, 100);
 
-
         // misc moves
         Move erdbeben = new Move("Erdbeben", "Boden", 100, 10, 100);
         Move eisstrahl = new Move("Eisstrahl", "Eis", 90, 10, 100);
@@ -28,26 +31,10 @@ public class main {
         Move drachenwut = new Move("Drachenwut", "Drache", 40, 10, 100);
         Move steinhagel = new Move("Steinhagel", "Gestein", 75, 10, 90);
 
+        //Pokemon po = (Pokemon) player.getTeam().get(0);
 
-        Pokemon bisaflor = new Pokemon("Bisaflor", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
-    }
+        Game.startGame();
 
-    public static void choosePokemon() {
-
-    }
-
-    public static void renderHealthBar(Pokemon current) {
-
-        int currentHP = current.getHealthPoints();
-        int maxHP = current.getMaxHealthPoints();
-
-        String healthBarFirst = "HP: xxxxxxxxxx ||";
-        String healthBarSecond = "       " + currentHP + " / " + maxHP + " ||";
-        String healthBarThird = "<==============||";
-
-        System.out.println(healthBarFirst);
-        System.out.println(healthBarSecond);
-        System.out.println(healthBarThird);
 
     }
 }
