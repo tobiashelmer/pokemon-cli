@@ -53,7 +53,7 @@ public class Game {
 
     private static void selectPokemon() {
 
-        String selectPokemonText = "Bitte wähle nun drei Pokemon für dein Team aus.";
+        String selectPokemonText = "\nBitte wähle nun drei Pokemon für dein Team aus.";
         System.out.println(selectPokemonText);
 
         do {
@@ -72,13 +72,13 @@ public class Game {
             }
 
             try {
-                String pickPokemonText = "Auswahl des " + pickPokemonNumberText + " Pokemons: ";
+                String pickPokemonText = "\nAuswahl des " + pickPokemonNumberText + " Pokemons: ";
                 System.out.print(pickPokemonText);
                 int pokemonNumber = scannerRead.nextInt();
                 teamPokemon.add(poolOfPokemon.get((pokemonNumber - 1)));
                 poolOfPokemon.remove((pokemonNumber - 1));
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("Bitte wählen Sie ein Pokemon aus der Liste aus.");
+                System.out.println("Bitte wählen Sie ein Pokemon aus der Liste aus.\n\n");
             }
 
         } while (teamPokemon.size() < TEAM_COUNT);
@@ -88,9 +88,13 @@ public class Game {
 
         for (Pokemon pokemon : teamPokemon) {
             String yourPokemonTeamSeperatorText;
+            String yourPokemonTeamSeperatorChar = ",";
+            String yourPokemonTeamSeperatorWord = "und";
 
-            if (teamPokemon.indexOf(pokemon) != (TEAM_COUNT - 1)) {
-                yourPokemonTeamSeperatorText = ", ";
+            if (teamPokemon.indexOf(pokemon) == (TEAM_COUNT - 2)) {
+                yourPokemonTeamSeperatorText = " " + yourPokemonTeamSeperatorWord + " ";
+            } else if (teamPokemon.indexOf(pokemon) != (TEAM_COUNT - 1)) {
+                yourPokemonTeamSeperatorText = " " + yourPokemonTeamSeperatorChar + " ";
             } else {
                 yourPokemonTeamSeperatorText = "";
             }
