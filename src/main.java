@@ -31,10 +31,6 @@ public class Main {
         Move drachenwut = new Move("Drachenwut", "Drache", 40, 10, 100);
         Move steinhagel = new Move("Steinhagel", "Gestein", 75, 10, 90);
 
-        //Pokemon po = (Pokemon) player.getTeam().get(0);
-
         Game.startGame();
-
-
     }
 }
