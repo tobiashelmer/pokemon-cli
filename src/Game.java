@@ -47,8 +47,7 @@ public class Game {
         System.out.println("Hallo " + name + "!");
 
         generatePokemon();
-
-        // FLO test obs geht
+        // FLO test obs gehttt
 
         Pokemon test = poolOfPokemon.get(1);
         Move testmove = rasierblatt;
@@ -58,7 +57,6 @@ public class Game {
         System.out.println("Angriff auf " + test.getName() + " mit der Attacke "+ movename + " hat einen Schadensmultiplier von: " + Multi);
 
         // test ende
-
         selectPokemon();
         rivalPokemon();
     }

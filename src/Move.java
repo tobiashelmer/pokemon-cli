@@ -187,25 +187,6 @@ public class Move {
         return stab;
     }
 
-    /**
-     * Random event that doubles the damage of a damage-dealing move.
-     *
-     * @return boolean
-     */
-    private static boolean isCriticalHit() {
-
-        boolean criticalHit = false;
-        Random random = new Random();
-        double chance = random.nextInt(100);
-
-        // simulates a 6.25% chance of a critical hit
-        if (chance < 6.25) {
-            criticalHit = true;
-            System.out.println("Ein Volltreffer!");
-        }
-
-        return criticalHit;
-    }
 
     /**
      * Attack is effective
@@ -285,4 +266,26 @@ public class Move {
 
         return multiplier;
     }
+
+    /**
+     * Random event that doubles the damage of a damage-dealing move.
+     *
+     * @return boolean
+     */
+    private static boolean isCriticalHit() {
+
+        boolean criticalHit = false;
+        Random random = new Random();
+        double chance = random.nextInt(100);
+
+        // simulates a 6.25% chance of a critical hit
+        if (chance < 6.25) {
+            criticalHit = true;
+            System.out.println("Ein Volltreffer!");
+        }
+
+        return criticalHit;
+    }
+
+
 }
