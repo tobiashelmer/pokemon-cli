@@ -4,6 +4,8 @@ public class Move {
 
     private final static double STAB_MULTIPLIER = 1.5;
     private final static double CRIT_MULTIPLIER = 2;
+    private final static double TYPE_MULTIPLIER_EFFECTIVE = 2;
+    private final static double TYPE_MULTIPLIER_INEFFECTIVE = 0.5;
 
     private String name;
     private String type;
