@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class Main {
     public static void main(String[] args) {
 
@@ -31,10 +29,6 @@ public class Main {
         Move drachenwut = new Move("Drachenwut", "Drache", 40, 10, 100);
         Move steinhagel = new Move("Steinhagel", "Gestein", 75, 10, 90);
 
-        //Pokemon po = (Pokemon) player.getTeam().get(0);
-
         Game.startGame();
-
-
     }
 }
