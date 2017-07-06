@@ -94,7 +94,7 @@ public class Game {
             if (teamPokemon.indexOf(pokemon) == (TEAM_COUNT - 2)) {
                 yourPokemonTeamSeperatorText = " " + yourPokemonTeamSeperatorWord + " ";
             } else if (teamPokemon.indexOf(pokemon) != (TEAM_COUNT - 1)) {
-                yourPokemonTeamSeperatorText = " " + yourPokemonTeamSeperatorChar + " ";
+                yourPokemonTeamSeperatorText = yourPokemonTeamSeperatorChar + " ";
             } else {
                 yourPokemonTeamSeperatorText = "";
             }
