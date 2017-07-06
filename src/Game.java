@@ -20,7 +20,7 @@ public class Game {
     private static void generatePokemon() {
 
         Pokemon bisaflor = new Pokemon("Bisaflor", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
-        Pokemon turtok = new Pokemon("Turtok", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
+        Pokemon turtok = new Pokemon("Turtok", "Wasser", rasierblatt, 50, 80, 100, 83, 80);
         Pokemon glurak = new Pokemon("Glurak", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
         Pokemon mewtu = new Pokemon("Mewtu", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
         Pokemon bisaflor2 = new Pokemon("Bisaflor2", "Pflanze", rasierblatt, 50, 80, 100, 83, 80);
@@ -47,6 +47,18 @@ public class Game {
         System.out.println("Hallo " + name + "!");
 
         generatePokemon();
+
+        // FLO test obs geht
+
+        Pokemon test = poolOfPokemon.get(1);
+        Move testmove = rasierblatt;
+        String movename = testmove.getName();
+
+        double Multi = Move.isEffective(testmove,test);
+        System.out.println("Angriff auf " + test.getName() + " mit der Attacke "+ movename + " hat einen Schadensmultiplier von: " + Multi);
+
+        // test ende
+
         selectPokemon();
         rivalPokemon();
     }

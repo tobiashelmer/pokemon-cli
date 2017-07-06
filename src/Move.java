@@ -206,4 +206,83 @@ public class Move {
 
         return criticalHit;
     }
+
+    /**
+     * Attack is effective
+     * <br>
+     * 2* Damage if Attack is effective, 1/2 damage if not effective
+     *
+     * @param move    as move
+     * @param pokemon as Pokemon
+     * @return double
+     */
+    public static double isEffective(Move move, Pokemon pokemon) {
+
+        double multiplier = 1;
+        String moveType = move.getType();
+        String pokemonType = pokemon.getType();
+
+        // set multiplier for type Feuer
+        if (moveType.equals("Feuer")) {
+
+            if (pokemonType.equals("Pflanze")||pokemonType.equals("Eis")||pokemonType.equals("Käfer")){
+                multiplier = 2;
+            }else if (pokemonType.equals("Wasser")||pokemonType.equals("Feuer")||pokemonType.equals("Gestein")||pokemonType.equals("Drache")){
+                multiplier = 0.5;
+            }else{};
+        }
+
+        // set multiplier for type Normal
+        if (moveType.equals("Normal")) {
+
+            if (pokemonType.equals("Gestein")||pokemonType.equals("Stahl")){
+                multiplier = 0.5;
+            }else if (pokemonType.equals("Geist")){
+                multiplier = 0;
+            }else{};
+        }
+
+        // set multiplier for type Normal
+        if (moveType.equals("Wasser")) {
+
+            if (pokemonType.equals("Wasser")||pokemonType.equals("Boden")||pokemonType.equals("Gestein")){
+                multiplier = 2;
+            }else if (pokemonType.equals("Wasser")||pokemonType.equals("Pflanze")||pokemonType.equals("Drache")){
+                multiplier = 0.5;
+            }else{};
+        }
+
+        // set multiplier for type Pflanze
+        if (moveType.equals("Pflanze")) {
+
+            if (pokemonType.equals("Wasser")||pokemonType.equals("Boden")||pokemonType.equals("Gestein")){
+                multiplier = 2;
+            }else if (pokemonType.equals("Feuer")||pokemonType.equals("Pflanze")||pokemonType.equals("Flug")||pokemonType.equals("Drache")||pokemonType.equals("Käfer")||pokemonType.equals("Stahl")){
+                multiplier = 0.5;
+            }else{};
+        }
+
+
+        if (moveType.equals("Elektro")) {
+
+            if (pokemonType.equals("Wasser")||pokemonType.equals("Flug")){
+                multiplier = 2;
+            }else if (pokemonType.equals("Pflanze")||pokemonType.equals("Elektro")||pokemonType.equals("Drache")){
+                multiplier = 0.5;
+            }else if (pokemonType.equals("Boden")){
+                multiplier = 0;
+            }else{};
+        }
+
+        if (moveType.equals("Eis")) {
+
+            if (pokemonType.equals("Pflanze")||pokemonType.equals("Flug")||pokemonType.equals("Boden")||pokemonType.equals("Drache")){
+                multiplier = 2;
+            }else if (pokemonType.equals("Feuer")||pokemonType.equals("Wasser")||pokemonType.equals("Eis")||pokemonType.equals("Stahl")){
+                multiplier = 0.5;
+            }else{};
+        }
+
+        return multiplier;
+    }
 }
