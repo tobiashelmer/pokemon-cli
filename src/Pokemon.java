@@ -7,8 +7,8 @@ public class Pokemon {
     private String name;
     private String type;
 
-    Move MoveOne;
-    Move MoveTwo;
+    Move moveOne;
+    Move moveTwo;
 
     private int baseHealthPoints;
     private int baseAttack;
@@ -33,25 +33,25 @@ public class Pokemon {
      *
      * @param name             as String
      * @param type             as String
-     * @param MoveOne          as Attack
+     * @param moveOne          as Attack
      * @param level            as int
      * @param baseHealthpoints as int
      * @param baseAttack       as int
      * @param baseDefense      as int
      * @param baseSpeed        as int
      */
-    public Pokemon(String name, String type, Move MoveOne, Move MoveTwo, int level, int baseHealthpoints, int baseAttack, int baseDefense, int baseSpeed) {
+    public Pokemon(String name, String type, Move moveOne, Move moveTwo, int level, int baseHealthpoints, int baseAttack, int baseDefense, int baseSpeed) {
         this.name = name;
         this.type = type;
-        this.MoveOne = MoveOne;
-        this.MoveTwo = MoveTwo;
+        this.moveOne = moveOne;
+        this.moveTwo = moveTwo;
         this.level = level;
         this.baseHealthPoints = baseHealthpoints;
         this.baseAttack = baseAttack;
         this.baseDefense = baseDefense;
         this.baseSpeed = baseSpeed;
-        this.poolOfMoves.add(this.MoveOne);
-        this.poolOfMoves.add(this.MoveTwo);
+        this.poolOfMoves.add(this.moveOne);
+        this.poolOfMoves.add(this.moveTwo);
 
         calculateStats(level, baseHealthpoints, baseAttack, baseDefense, baseSpeed);
     }
