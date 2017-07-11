@@ -337,14 +337,6 @@ public class Pokemon {
     }
 
     public boolean isAlive() {
-
-        int currentHP = this.currentHealthPoints;
-        boolean alive = true;
-
-        if (currentHP <= 0) {
-            alive = false;
-        }
-
-        return alive;
+        return (currentHealthPoints >= 0);
     }
 }
