@@ -186,7 +186,6 @@ public class Move {
 
     /**
      * Same Type move Bonus (STAB)
-     * <br>
      * 50% damage boost of an move when it is the same type as one of the types of the Pokemon using the move
      *
      * @param move    as move
@@ -209,8 +208,7 @@ public class Move {
 
 
     /**
-     * Attack is effective
-     * <br>
+     * Checks if attack is effective
      * 2* Damage if Attack is effective, 1/2 damage if not effective
      *
      * @param move    as move
@@ -259,6 +257,7 @@ public class Move {
             }
         }
 
+        // set multiplier for type Pflanze
         if (moveType.equals("Elektro")) {
             if (pokemonType.equals("Wasser") || pokemonType.equals("Flug")) {
                 multiplier = TYPE_MULTIPLIER_EFFECTIVE;
@@ -269,6 +268,7 @@ public class Move {
             }
         }
 
+        // set multiplier for type Eis
         if (moveType.equals("Eis")) {
             if (pokemonType.equals("Pflanze") || pokemonType.equals("Flug") || pokemonType.equals("Boden") || pokemonType.equals("Drache")) {
                 multiplier = TYPE_MULTIPLIER_EFFECTIVE;

@@ -6,7 +6,6 @@ public class Game {
     private final static int TEAM_COUNT = 3;
     private static String yourInputText = "Eingabe: ";
 
-
     private static Scanner scannerRead = new Scanner(System.in);
     private static ArrayList<Pokemon> poolOfPokemon = new ArrayList<>();
     private static ArrayList<Pokemon> teamPokemon = new ArrayList<>();
@@ -37,6 +36,10 @@ public class Game {
     private static Move drachenwut = new Move("Drachenwut", "Drache", 40, 10, 100);
     private static Move steinhagel = new Move("Steinhagel", "Gestein", 75, 10, 90);
 
+
+    /**
+     * starts the game and calls functions to play the game
+     */
     static void startGame() {
 
         generatePlayer();
@@ -49,6 +52,9 @@ public class Game {
 
     }
 
+    /**
+     * create player and rival and set names for them
+     */
     private static void generatePlayer() {
         String openingText = "Hallo! Herzlich willkommen in der Welt der POKéMON! Mein Name ist EICH! Man nennt mich den POKéMON-PROFESSOR! Diese Welt wird von Wesen bewohnt, die man POKéMON nennt! Für manche Leute sind POKéMON Haustiere, andere tragen Kämpfe mit ihnen aus. Ich selbst habe mein Hobby zum Beruf gemacht und studiere POKéMON.";
         String followText = "... und dies ist mein Enkel. Von jeher wollt Ihr einander übertrumpfen! Hmm, wie war noch gleich sein Name? ";
@@ -76,6 +82,7 @@ public class Game {
 
     }
 
+    // just a collection of object creations
     private static void generatePokemon() {
 
         // creating new Pokemon
@@ -103,13 +110,16 @@ public class Game {
         poolOfPokemon.add(relaxo);
     }
 
+    // select three pokemon for the fight and displays them at the end
     private static void selectPokemon() {
 
         String selectPokemonText = "\nBitte wähle nun drei Pokemon für dein Team aus.";
         System.out.println(selectPokemonText);
 
+        // needs 3 pokemon to complete the loop
         do {
 
+            // prints out pokemon available from the whole pool
             for (Pokemon pokemon : poolOfPokemon) {
                 System.out.println("(" + (poolOfPokemon.indexOf(pokemon) + 1) + ") " + pokemon.getName());
             }
@@ -123,6 +133,7 @@ public class Game {
                 pickPokemonNumberText = "dritten";
             }
 
+            // catches if you enter a number not available
             try {
                 String pickPokemonText = "\nAuswahl des " + pickPokemonNumberText + " Pokemons: ";
                 System.out.print(pickPokemonText);
@@ -138,6 +149,7 @@ public class Game {
         String yourPokemonTeamText = "\nGewählte Pokemon: ";
         System.out.print(yourPokemonTeamText);
 
+        // prints out selected pokemon from teamArray
         for (Pokemon pokemon : teamPokemon) {
             String yourPokemonTeamSeperatorText;
             String yourPokemonTeamSeperatorChar = ",";
@@ -154,10 +166,12 @@ public class Game {
         }
     }
 
+    // selects three random pokemon remaining from poolOfPokemon for the rival
     private static void rivalPokemon() {
 
         while (rivalPokemon.size() < TEAM_COUNT) {
 
+            // catches if you enter a number not available
             try {
                 int pokemonNumber = (int) (Math.random() * poolOfPokemon.size());
                 rivalPokemon.add(poolOfPokemon.get(pokemonNumber));
@@ -169,9 +183,10 @@ public class Game {
     }
 
     /**
+     * select pokemon for the fight
+     *
      * @return enterNumber as int
      */
-
     private static int choosePokemon() {
 
         int enterNumber;
@@ -185,9 +200,19 @@ public class Game {
         System.out.print(yourInputText);
         enterNumber = scannerRead.nextInt();
 
+        // -1 is necessary because Array starts at 0 and not at 1
         return enterNumber - 1;
     }
 
+    /**
+     * pokemon battle as in the games
+     * pokemon which is faster attacks first, enemy selects random move to attack with
+     * if defeated, pokemon gets removed from ArrayList and next will be selected
+     * if no pokemon is available you lost
+     *
+     * @param teamPokemon  as ArrayList<Pokemon>
+     * @param rivalPokemon as ArrayList<Pokemon>
+     */
     private static void battle(ArrayList<Pokemon> teamPokemon, ArrayList<Pokemon> rivalPokemon) {
 
         int activePokemon = choosePokemon();
@@ -197,14 +222,17 @@ public class Game {
         Pokemon yourPokemon = teamPokemon.get(activePokemon);
         Pokemon rivalPkmn = rivalPokemon.get(0);
 
+
+        // once a pokemon is fainted everything starts again
         do {
+            // generates random number (0, 1) to select attack for rival
             int randomMove = (int) (Math.random() * 1);
             System.out.println(paragraphText);
             renderHealthBar(rivalPkmn);
             System.out.print(paragraphText);
             renderHealthBar(yourPokemon);
 
-
+            // prints out pokemon's moves
             System.out.print("Attacken: ");
             ArrayList<Move> movePool = yourPokemon.getMoves();
             for (Move move : movePool) {
@@ -227,17 +255,19 @@ public class Game {
 
         } while (yourPokemon.isAlive() && rivalPkmn.isAlive());
 
-
+        // checks if own pokemon fainted and removes it from the ArrayList
         if (!yourPokemon.isAlive()) {
             System.out.println(yourPokemon.getName() + " wurde besiegt");
-            removePokemonIfDefeated(teamPokemon, activePokemon);
+            removePokemonFromList(teamPokemon, activePokemon);
         }
 
+        // checks if rival pokemon fainted and removes it from the ArrayList
         if (!rivalPkmn.isAlive()) {
             System.out.println(yourPokemon.getName() + " (Gegner) wurde besiegt!");
-            removePokemonIfDefeated(rivalPokemon, 0);
+            removePokemonFromList(rivalPokemon, 0);
         }
 
+        // if no pokemon is available you/the rival lost
         if (teamPokemon.isEmpty()) {
             System.out.println("Du wurdest besiegt!");
         } else if (rivalPokemon.isEmpty()) {
@@ -246,6 +276,11 @@ public class Game {
 
     }
 
+    /**
+     * displays heathbar, name and level of the pokemon
+     *
+     * @param pokemon as Pokemon
+     */
     private static void renderHealthBar(Pokemon pokemon) {
 
         String pokemonName = pokemon.getName();
@@ -257,7 +292,13 @@ public class Game {
         System.out.println(currentHP + " | " + maximumHP + " KP");
     }
 
-    private static void removePokemonIfDefeated(ArrayList<Pokemon> listOfPokemon, int positionInArrayList) {
+    /**
+     * removes pokemon from ArrayList
+     *
+     * @param listOfPokemon       as ArrayList<Pokemon>
+     * @param positionInArrayList as int
+     */
+    private static void removePokemonFromList(ArrayList<Pokemon> listOfPokemon, int positionInArrayList) {
 
         listOfPokemon.remove(positionInArrayList);
 

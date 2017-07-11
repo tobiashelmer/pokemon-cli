@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Pokemon {
 
-    private final static int MAXIMUM_EFFORT_VALUE = 510;
     private ArrayList<Move> poolOfMoves = new ArrayList<>();
 
     private String name;
