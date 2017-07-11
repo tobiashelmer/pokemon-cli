@@ -1,14 +1,15 @@
+import java.util.ArrayList;
+
 public class Pokemon {
 
     private final static int MAXIMUM_EFFORT_VALUE = 510;
+    private ArrayList<Move> poolOfMoves = new ArrayList<>();
 
     private String name;
     private String type;
 
     Move MoveOne;
     Move MoveTwo;
-    Move MoveThree;
-    Move MoveFour;
 
     private int baseHealthPoints;
     private int baseAttack;
@@ -40,15 +41,18 @@ public class Pokemon {
      * @param baseDefense      as int
      * @param baseSpeed        as int
      */
-    public Pokemon(String name, String type, Move MoveOne, int level, int baseHealthpoints, int baseAttack, int baseDefense, int baseSpeed) {
+    public Pokemon(String name, String type, Move MoveOne, Move MoveTwo, int level, int baseHealthpoints, int baseAttack, int baseDefense, int baseSpeed) {
         this.name = name;
         this.type = type;
         this.MoveOne = MoveOne;
+        this.MoveTwo = MoveTwo;
         this.level = level;
         this.baseHealthPoints = baseHealthpoints;
         this.baseAttack = baseAttack;
         this.baseDefense = baseDefense;
         this.baseSpeed = baseSpeed;
+        this.poolOfMoves.add(this.MoveOne);
+        this.poolOfMoves.add(this.MoveTwo);
 
         calculateStats(level, baseHealthpoints, baseAttack, baseDefense, baseSpeed);
     }
@@ -87,6 +91,24 @@ public class Pokemon {
      */
     public void setType(String type) {
         this.type = type;
+    }
+
+    /**
+     * Get Pokemon Level
+     *
+     * @return level as int
+     */
+    public int getLevel() {
+        return level;
+    }
+
+    /**
+     * Set Pokemon level
+     *
+     * @param level as int
+     */
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     /**
@@ -252,6 +274,15 @@ public class Pokemon {
     }
 
     /**
+     * Get Moves
+     *
+     * @return Moves as Array
+     */
+    public ArrayList<Move> getMoves() {
+        return poolOfMoves;
+    }
+
+    /**
      * generates and returns a random number between 1 and 31
      *
      * @return int
@@ -261,10 +292,6 @@ public class Pokemon {
         return (int) (Math.random() * 31 + 1);
     }
 
-    private int generateEffortValue() {
-
-        return (int) (Math.random() * 255 + 1);
-    }
 
     /**
      * calculates stats based on base values and random generated iv
@@ -308,5 +335,17 @@ public class Pokemon {
         // calculate and set speed
         int speed = (2 * baseSpeed + speedIv) * level / 100 + 5;
         this.setSpeed(speed);
+    }
+
+    public boolean isAlive() {
+
+        int currentHP = this.currentHealthPoints;
+        boolean alive = true;
+
+        if (currentHP <= 0) {
+            alive = false;
+        }
+
+        return alive;
     }
 }

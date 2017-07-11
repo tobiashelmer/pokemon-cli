@@ -5,10 +5,6 @@ public class Player {
     private String name;
     ArrayList<Pokemon> team = new ArrayList<>();
 
-    public Player(String name) {
-        this.name = name;
-    }
-
     /**
      * Get Trainer Name
      *
@@ -45,7 +41,6 @@ public class Player {
     public void setTeam(Pokemon pokemon) {
         this.team.add(pokemon);
     }
-
 
 
 }

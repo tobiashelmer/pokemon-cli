@@ -130,12 +130,18 @@ public class Move {
      * @param defender as Pokemon
      * @return int
      */
-    public static int calculateDamage(Move move, Pokemon attacker, Pokemon defender) {
+    public static int calculateDamage(Move move, Pokemon attacker, Pokemon defender, boolean rival) {
+
+        String effectiveText;
+        String critText = "Ein Volltreffer! ";
 
         boolean stab = isStab(move, attacker);
         boolean crit = isCriticalHit();
+        double effective = isEffective(move, defender);
         double multiplier = 1;
+        double modifier;
         int damage;
+        int level = attacker.getLevel();
         int hp = defender.getHealthPoints();
         int movePower = move.getPower();
         int attackerAttack = attacker.getAttack();
@@ -151,14 +157,28 @@ public class Move {
             multiplier *= CRIT_MULTIPLIER;
         }
 
+        if (effective == 2) {
+            effectiveText = "Das ist sehr effektiv!";
+        } else if (effective == 0.5) {
+            effectiveText = "Das ist nicht sehr effektiv..";
+        } else {
+            effectiveText = "";
+        }
+
+        modifier = multiplier * effective;
+
         // damage calculation
-        damage = (int) ((((((2 * 50) / 5) + 2) * movePower * (attackerAttack / defenderDefense) / 50) + 2) * multiplier);
+        damage = (int) (((((((2 * level) / 5) + 2) * movePower * attackerAttack / defenderDefense) / 50) + 2) * modifier);
 
         // lowers Pokemon HP by the damage dealt
         defender.setHealthPoints(hp - damage);
 
         // prints out damage message
-        System.out.println(move.getName() + " hat " + damage + " Schaden zugefuegt!");
+        if (rival) {
+            System.out.println((crit ? critText : "") + attacker.getName() + " (Gegner) setzt " + move.getName() + " ein und hat dir " + damage + " Schaden zugefügt! " + effectiveText);
+        } else {
+            System.out.println((crit ? critText : "") + attacker.getName() + " setzt " + move.getName() + " ein und hat " + defender.getName() + " (Gegner) " + damage + " Schaden zugefügt! " + effectiveText);
+        }
 
         return damage;
     }
@@ -197,7 +217,7 @@ public class Move {
      * @param pokemon as Pokemon
      * @return double
      */
-    public static double isEffective(Move move, Pokemon pokemon) {
+    private static double isEffective(Move move, Pokemon pokemon) {
 
         double multiplier = 1;
         String moveType = move.getType();
@@ -205,63 +225,56 @@ public class Move {
 
         // set multiplier for type Feuer
         if (moveType.equals("Feuer")) {
-
-            if (pokemonType.equals("Pflanze")||pokemonType.equals("Eis")||pokemonType.equals("Käfer")){
-                multiplier = 2;
-            }else if (pokemonType.equals("Wasser")||pokemonType.equals("Feuer")||pokemonType.equals("Gestein")||pokemonType.equals("Drache")){
-                multiplier = 0.5;
-            }else{};
+            if (pokemonType.equals("Pflanze") || pokemonType.equals("Eis") || pokemonType.equals("Käfer")) {
+                multiplier = TYPE_MULTIPLIER_EFFECTIVE;
+            } else if (pokemonType.equals("Wasser") || pokemonType.equals("Feuer") || pokemonType.equals("Gestein") || pokemonType.equals("Drache")) {
+                multiplier = TYPE_MULTIPLIER_INEFFECTIVE;
+            }
         }
 
         // set multiplier for type Normal
         if (moveType.equals("Normal")) {
-
-            if (pokemonType.equals("Gestein")||pokemonType.equals("Stahl")){
-                multiplier = 0.5;
-            }else if (pokemonType.equals("Geist")){
+            if (pokemonType.equals("Gestein") || pokemonType.equals("Stahl")) {
+                multiplier = TYPE_MULTIPLIER_INEFFECTIVE;
+            } else if (pokemonType.equals("Geist")) {
                 multiplier = 0;
-            }else{};
+            }
         }
 
-        // set multiplier for type Normal
+        // set multiplier for type Wasser
         if (moveType.equals("Wasser")) {
-
-            if (pokemonType.equals("Wasser")||pokemonType.equals("Boden")||pokemonType.equals("Gestein")){
-                multiplier = 2;
-            }else if (pokemonType.equals("Wasser")||pokemonType.equals("Pflanze")||pokemonType.equals("Drache")){
-                multiplier = 0.5;
-            }else{};
+            if (pokemonType.equals("Feuer") || pokemonType.equals("Boden") || pokemonType.equals("Gestein")) {
+                multiplier = TYPE_MULTIPLIER_EFFECTIVE;
+            } else if (pokemonType.equals("Wasser") || pokemonType.equals("Pflanze") || pokemonType.equals("Drache")) {
+                multiplier = TYPE_MULTIPLIER_INEFFECTIVE;
+            }
         }
 
         // set multiplier for type Pflanze
         if (moveType.equals("Pflanze")) {
-
-            if (pokemonType.equals("Wasser")||pokemonType.equals("Boden")||pokemonType.equals("Gestein")){
-                multiplier = 2;
-            }else if (pokemonType.equals("Feuer")||pokemonType.equals("Pflanze")||pokemonType.equals("Flug")||pokemonType.equals("Drache")||pokemonType.equals("Käfer")||pokemonType.equals("Stahl")){
-                multiplier = 0.5;
-            }else{};
+            if (pokemonType.equals("Wasser") || pokemonType.equals("Boden") || pokemonType.equals("Gestein")) {
+                multiplier = TYPE_MULTIPLIER_EFFECTIVE;
+            } else if (pokemonType.equals("Feuer") || pokemonType.equals("Pflanze") || pokemonType.equals("Flug") || pokemonType.equals("Drache") || pokemonType.equals("Käfer") || pokemonType.equals("Stahl")) {
+                multiplier = TYPE_MULTIPLIER_INEFFECTIVE;
+            }
         }
 
-
         if (moveType.equals("Elektro")) {
-
-            if (pokemonType.equals("Wasser")||pokemonType.equals("Flug")){
-                multiplier = 2;
-            }else if (pokemonType.equals("Pflanze")||pokemonType.equals("Elektro")||pokemonType.equals("Drache")){
-                multiplier = 0.5;
-            }else if (pokemonType.equals("Boden")){
+            if (pokemonType.equals("Wasser") || pokemonType.equals("Flug")) {
+                multiplier = TYPE_MULTIPLIER_EFFECTIVE;
+            } else if (pokemonType.equals("Pflanze") || pokemonType.equals("Elektro") || pokemonType.equals("Drache")) {
+                multiplier = TYPE_MULTIPLIER_INEFFECTIVE;
+            } else if (pokemonType.equals("Boden")) {
                 multiplier = 0;
-            }else{};
+            }
         }
 
         if (moveType.equals("Eis")) {
-
-            if (pokemonType.equals("Pflanze")||pokemonType.equals("Flug")||pokemonType.equals("Boden")||pokemonType.equals("Drache")){
-                multiplier = 2;
-            }else if (pokemonType.equals("Feuer")||pokemonType.equals("Wasser")||pokemonType.equals("Eis")||pokemonType.equals("Stahl")){
-                multiplier = 0.5;
-            }else{};
+            if (pokemonType.equals("Pflanze") || pokemonType.equals("Flug") || pokemonType.equals("Boden") || pokemonType.equals("Drache")) {
+                multiplier = TYPE_MULTIPLIER_EFFECTIVE;
+            } else if (pokemonType.equals("Feuer") || pokemonType.equals("Wasser") || pokemonType.equals("Eis") || pokemonType.equals("Stahl")) {
+                multiplier = TYPE_MULTIPLIER_INEFFECTIVE;
+            }
         }
 
         return multiplier;
@@ -281,7 +294,6 @@ public class Move {
         // simulates a 6.25% chance of a critical hit
         if (chance < 6.25) {
             criticalHit = true;
-            System.out.println("Ein Volltreffer!");
         }
 
         return criticalHit;
