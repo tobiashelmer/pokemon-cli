@@ -215,7 +215,8 @@ public class Game {
      */
     private static void battle(ArrayList<Pokemon> teamPokemon, ArrayList<Pokemon> rivalPokemon) {
 
-        int activePokemon = choosePokemon();
+
+        int activePokemon=choosePokemon();
         int selectMove;
         String paragraphText = "\n";
 
@@ -240,18 +241,20 @@ public class Game {
             }
 
             System.out.print(paragraphText + yourInputText);
-            selectMove = scannerRead.nextInt();
 
+            selectMove = scannerRead.nextInt();
             System.out.println(paragraphText);
 
             // if own pokemon is faster, attack first otherwise rival attacks first
             if (yourPokemon.getSpeed() > rivalPkmn.getSpeed()) {
                 Move.calculateDamage(movePool.get(selectMove - 1), yourPokemon, rivalPokemon.get(0), false);
-                Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);
+                if(rivalPkmn.getHealthPoints()>0){
+                Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);}
             } else {
-                Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);
-                Move.calculateDamage(movePool.get(selectMove - 1), yourPokemon, rivalPokemon.get(0), false);
-            }
+                    Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);
+                    if(yourPokemon.getHealthPoints()>0){
+                        Move.calculateDamage(movePool.get(selectMove - 1), yourPokemon, rivalPokemon.get(0), false);}
+                }
 
         } while (yourPokemon.isAlive() && rivalPkmn.isAlive());
 
@@ -263,7 +266,7 @@ public class Game {
 
         // checks if rival pokemon fainted and removes it from the ArrayList
         if (!rivalPkmn.isAlive()) {
-            System.out.println(yourPokemon.getName() + " (Gegner) wurde besiegt!");
+            System.out.println(rivalPkmn.getName() + " (Gegner) wurde besiegt!");
             removePokemonFromList(rivalPokemon, 0);
         }
 
