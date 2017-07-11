@@ -215,8 +215,7 @@ public class Game {
      */
     private static void battle(ArrayList<Pokemon> teamPokemon, ArrayList<Pokemon> rivalPokemon) {
 
-
-        int activePokemon=choosePokemon();
+        int activePokemon = choosePokemon();
         int selectMove;
         String paragraphText = "\n";
 
@@ -248,13 +247,15 @@ public class Game {
             // if own pokemon is faster, attack first otherwise rival attacks first
             if (yourPokemon.getSpeed() > rivalPkmn.getSpeed()) {
                 Move.calculateDamage(movePool.get(selectMove - 1), yourPokemon, rivalPokemon.get(0), false);
-                if(rivalPkmn.getHealthPoints()>0){
-                Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);}
-            } else {
+                if (rivalPkmn.getHealthPoints() > 0) {
                     Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);
-                    if(yourPokemon.getHealthPoints()>0){
-                        Move.calculateDamage(movePool.get(selectMove - 1), yourPokemon, rivalPokemon.get(0), false);}
                 }
+            } else {
+                Move.calculateDamage(movePool.get(randomMove), rivalPokemon.get(0), yourPokemon, true);
+                if (yourPokemon.getHealthPoints() > 0) {
+                    Move.calculateDamage(movePool.get(selectMove - 1), yourPokemon, rivalPokemon.get(0), false);
+                }
+            }
 
         } while (yourPokemon.isAlive() && rivalPkmn.isAlive());
 
