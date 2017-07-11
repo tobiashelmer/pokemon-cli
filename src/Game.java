@@ -11,9 +11,6 @@ public class Game {
     private static ArrayList<Pokemon> teamPokemon = new ArrayList<>();
     private static ArrayList<Pokemon> rivalPokemon = new ArrayList<>();
 
-    private static Player player = new Player();
-    private static Player rival = new Player();
-
     // normal moves
     private static Move tackle = new Move("Tackle", "Normal", 50, 35, 100);
     private static Move ruckzuckhieb = new Move("Ruckzuckhieb", "Normal", 40, 30, 100);
@@ -66,7 +63,7 @@ public class Game {
         System.out.print("Wie lautet dein Name? ");
         String playerName;
         playerName = scannerRead.next();
-        player.setName(playerName);
+        Player player = new Player(playerName);
         System.out.println("... Richtig! Dein Name ist " + player.getName() + "!");
 
         System.out.print(followText);
@@ -74,7 +71,7 @@ public class Game {
         // Rival Name
         String rivalName;
         rivalName = scannerRead.next();
-        rival.setName(rivalName);
+        Player rival = new Player(rivalName);
         System.out.println(rival.getName() + "! Stimmt! Es lag mir auf der Zunge!");
 
         System.out.println(player.getName() + endText);
