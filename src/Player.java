@@ -3,15 +3,6 @@ public class Player {
     private String name;
 
     /**
-     * Class Constructor
-     *
-     * @param name as String
-     */
-    public Player(String name) {
-        this.name = name;
-    }
-
-    /**
      * Get Trainer Name
      *
      * @return String
